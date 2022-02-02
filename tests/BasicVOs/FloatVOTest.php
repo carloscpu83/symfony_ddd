@@ -62,7 +62,7 @@ class FloatVOTest extends TestCase
     public function testWithoutDecimalsToString()
     {
         $float = FloatVO::fromValue(1);
-        $this->assertEquals($float->stringValue(), '1,00');
+        $this->assertEquals($float->__toString(), '1,00');
     }
 
     /**
@@ -71,7 +71,7 @@ class FloatVOTest extends TestCase
     public function testShortDecimalsToString(): void
     {
         $float = FloatVO::fromValue(1.1);
-        $this->assertEquals($float->stringValue(), '1,10');
+        $this->assertEquals($float->__toString(), '1,10');
     }
 
     /**
@@ -80,6 +80,6 @@ class FloatVOTest extends TestCase
     public function testLargeDecimalsToString(): void
     {
         $float = FloatVO::fromValue(1.123456);
-        $this->assertEquals($float->stringValue(), '1,12');
+        $this->assertEquals($float->__toString(), '1,12');
     }
 }

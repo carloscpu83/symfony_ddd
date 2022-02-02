@@ -22,7 +22,7 @@ class StringVO
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->value;
     }
@@ -55,7 +55,7 @@ class StringVO
     /**
      * @return string
      */
-    public function value()
+    public function value(): string
     {
         return $this->value;
     }

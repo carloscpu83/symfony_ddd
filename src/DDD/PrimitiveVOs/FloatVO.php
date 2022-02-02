@@ -50,7 +50,7 @@ class FloatVO
     /**
      * @return string
      */
-    public function stringValue(): string
+    public function __toString(): string
     {
         return number_format($this->value, 2, ',', '');
     }
