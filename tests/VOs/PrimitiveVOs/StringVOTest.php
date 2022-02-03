@@ -100,4 +100,29 @@ class StringVOTest extends TestCase
 
         $this->assertEquals($word, $string->capitalize());
     }
+
+    /**
+     * @return void
+     */
+    public function testEqual(): void
+    {
+        $faker = Factory::create();
+        $value = $faker->word();
+        $voA = StringVO::fromString($value);
+        $voB = StringVO::fromString($value);
+        $this->assertTrue($voA->equal($voB));
+    }
+
+    /**
+     * @return void
+     */
+    public function testNotEqual(): void
+    {
+        $faker = Factory::create();
+        $valueA = $faker->word();
+        $valueB = $faker->word();
+        $voA = StringVO::fromString($valueA);
+        $voB = StringVO::fromString($valueB);
+        $this->assertFalse($voA->equal($voB));
+    }
 }

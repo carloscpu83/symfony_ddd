@@ -60,8 +60,21 @@ class StringVO
         return $this->value;
     }
 
+    /**
+     * @param string $value
+     * @return self
+     */
     public static function fromString(string $value): self
     {
         return new static($value);
+    }
+
+    /**
+     * @param StringVO $vo
+     * @return boolean
+     */
+    public function equal(StringVO $vo): bool
+    {
+        return $this->value === $vo->value();
     }
 }

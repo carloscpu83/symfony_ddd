@@ -39,4 +39,29 @@ class IntegerVOTest extends TestCase
         $integerVO = IntegerVO::fromInt($fakerValue);
         $this->assertEquals((string)$fakerValue, $integerVO->__toString());
     }
+
+    /**
+     * @return void
+     */
+    public function testEqual(): void
+    {
+        $faker = Factory::create();
+        $value = $faker->randomNumber();
+        $voA = IntegerVO::fromInt($value);
+        $voB = IntegerVO::fromInt($value);
+        $this->assertTrue($voA->equal($voB));
+    }
+
+    /**
+     * @return void
+     */
+    public function testNotEqual(): void
+    {
+        $faker = Factory::create();
+        $valueA = $faker->randomNumber();
+        $valueB = $faker->randomNumber();
+        $voA = IntegerVO::fromInt($valueA);
+        $voB = IntegerVO::fromInt($valueB);
+        $this->assertFalse($voA->equal($voB));
+    }
 }

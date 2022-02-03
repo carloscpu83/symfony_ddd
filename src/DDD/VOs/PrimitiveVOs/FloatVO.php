@@ -54,4 +54,13 @@ class FloatVO
     {
         return number_format($this->value, 2, ',', '');
     }
+
+    /**
+     * @param FloatVO $vo
+     * @return boolean
+     */
+    public function equal(FloatVO $vo): bool
+    {
+        return $this->value === $vo->value();
+    }
 }

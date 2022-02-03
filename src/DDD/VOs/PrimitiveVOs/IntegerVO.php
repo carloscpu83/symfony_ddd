@@ -44,4 +44,12 @@ class IntegerVO
         return (string)$this->value;
     }
 
+    /**
+     * @param IntegerVO $vo
+     * @return boolean
+     */
+    public function equal(IntegerVO $vo): bool
+    {
+        return $this->value === $vo->value();
+    }
 }
