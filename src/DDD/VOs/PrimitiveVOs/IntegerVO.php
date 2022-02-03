@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DDD\PrimitiveVOs;
+namespace App\DDD\VOs\PrimitiveVOs;
 
 class IntegerVO
 {

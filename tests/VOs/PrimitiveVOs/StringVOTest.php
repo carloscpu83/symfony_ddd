@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\tests;
 
 use PHPUnit\Framework\TestCase;
-use App\DDD\PrimitiveVOs\StringVO;
+use App\DDD\VOs\PrimitiveVOs\StringVO;
 use Faker\Factory;
 
 class StringVOTest extends TestCase

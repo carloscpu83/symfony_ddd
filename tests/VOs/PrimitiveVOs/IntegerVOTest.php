@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\tests;
 
 use PHPUnit\Framework\TestCase;
-use App\DDD\PrimitiveVOs\IntegerVO;
+use App\DDD\VOs\PrimitiveVOs\IntegerVO;
 use Faker\Factory;
 
 class IntegerVOTest extends TestCase

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\tests;
 
-use App\DDD\PrimitiveVOs\FloatVO;
+use App\DDD\VOs\PrimitiveVOs\FloatVO;
 use PHPUnit\Framework\TestCase;
 
 class FloatVOTest extends TestCase
