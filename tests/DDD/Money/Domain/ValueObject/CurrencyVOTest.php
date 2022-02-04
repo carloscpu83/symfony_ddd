@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\tests\VOs\BasicVOs;
+namespace App\tests\DDD\VOs\BasicVOs;
 
 use Faker\Factory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use App\DDD\VOs\BasicVOs\CurrencyVO;
+use App\DDD\Money\Domain\ValueObject\CurrencyVO;
 use App\DDD\VOs\PrimitiveVOs\StringVO;
 
 class CurrencyVOTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DDD\VOs\BasicVOs;
+namespace App\DDD\Money\Domain\ValueObject;
 
 use App\DDD\VOs\PrimitiveVOs\StringVO;
 use InvalidArgumentException;

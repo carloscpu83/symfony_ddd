@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\tests\VOs\BasicVOs;
+namespace App\tests\DDD\VOs\BasicVOs;
 
 use PHPUnit\Framework\TestCase;
-use App\DDD\VOs\BasicVOs\AmountVO;
+use App\DDD\Money\Domain\ValueObject\AmountVO;
 use App\DDD\VOs\PrimitiveVOs\FloatVO;
 use Faker\Factory;
 

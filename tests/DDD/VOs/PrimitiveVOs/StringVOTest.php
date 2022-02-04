@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\tests\VOs\PrimitiveVOs;
+namespace App\tests\DDD\VOs\PrimitiveVOs;
 
 use PHPUnit\Framework\TestCase;
 use App\DDD\VOs\PrimitiveVOs\StringVO;
