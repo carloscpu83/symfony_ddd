@@ -109,7 +109,7 @@ class MoneyTest extends TestCase
         $faker = Factory::create();
 
         $floatA = $faker->randomFloat(2);
-        $floatB = $faker->randomFloat(2);
+        $floatB = $floatA + 1;
         $moneyA = Money::instantiate(
             CurrencyVO::fromStringVo(StringVO::fromString('EUR')),
             AmountVO::fromFloatVo(FloatVO::fromValue($floatA))
@@ -134,7 +134,7 @@ class MoneyTest extends TestCase
         $faker = Factory::create();
 
         $floatA = $faker->randomFloat(2);
-        $floatB = $faker->randomFloat(2);
+        $floatB = $floatA + 1;
         $moneyA = Money::instantiate(
             CurrencyVO::fromStringVo(StringVO::fromString('USD')),
             AmountVO::fromFloatVo(FloatVO::fromValue($floatA))
@@ -146,5 +146,30 @@ class MoneyTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $moneyA->add($moneyB);
+    }
+
+    /**
+     * @return void
+     */
+    public function testCheckReplaceability(): void
+    {
+        $faker = Factory::create();
+
+        $floatA = $faker->randomFloat(2);
+        $floatB = $floatA + 1;
+        $moneyA = Money::instantiate(
+            CurrencyVO::fromStringVo(StringVO::fromString('EUR')),
+            AmountVO::fromFloatVo(FloatVO::fromValue($floatA))
+        );
+        $moneyB = Money::instantiate(
+            CurrencyVO::fromStringVo(StringVO::fromString('EUR')),
+            AmountVO::fromFloatVo(FloatVO::fromValue($floatB))
+        );
+        $moneyA->add($moneyB);
+
+        $this->assertEquals(
+            $moneyA->amount()->value()->value(),
+            $floatA
+        );
     }
 }

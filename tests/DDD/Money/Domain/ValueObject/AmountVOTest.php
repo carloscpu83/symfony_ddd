@@ -58,13 +58,16 @@ class AmountVOTest extends TestCase
         $faker = Factory::create();
 
         $floatNumberA = $faker->randomFloat(2);
-        $floatNumberB = $faker->randomFloat(2);
+        $floatNumberB = $floatNumberA + 1;
         $amountA = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberA));
         $amountB = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberB));
 
         $this->assertFalse($amountA->equal($amountB));
     }
 
+    /**
+     * @return void
+     */
     public function testAdd(): void
     {
         $faker = Factory::create();
@@ -78,6 +81,25 @@ class AmountVOTest extends TestCase
         $this->assertEquals(
             $amountC->value()->value(),
             (float)bcdiv((string)($floatNumberA + $floatNumberB), '1', 2)
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCheckReplaceability(): void
+    {
+        $faker = Factory::create();
+
+        $floatNumberA = $faker->randomFloat(2);
+        $floatNumberB = $floatNumberA + 1;
+        $amountA = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberA));
+        $amountB = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberB));
+        $amountA->add($amountB);
+
+        $this->assertEquals(
+            $amountA->value()->value(),
+            $floatNumberA
         );
     }
 }

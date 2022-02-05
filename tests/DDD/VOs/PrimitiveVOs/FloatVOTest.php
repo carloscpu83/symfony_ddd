@@ -149,7 +149,7 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $valueA = $faker->randomFloat(3);
-        $valueB = $faker->randomFloat(4);
+        $valueB = $valueA + 1;
         $voA = FloatVO::fromValue($valueA);
         $voB = FloatVO::fromValue($valueB);
 
@@ -164,7 +164,7 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $valueA = $faker->randomFloat(2);
-        $valueB = $faker->randomFloat(2);
+        $valueB = $valueA + 1;
         $voA = FloatVO::fromValue($valueA);
         $voB = FloatVO::fromValue($valueB);
         $resultVo = $voA->add($voB);
@@ -172,6 +172,25 @@ class FloatVOTest extends TestCase
         $this->assertEquals(
             (float)bcdiv((string)($valueA + $valueB), '1', 2),
             $resultVo->value()
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testCheckReplaceability(): void
+    {
+        $faker = Factory::create();
+
+        $valueA = $faker->randomFloat(2);
+        $valueB = $valueA + 1;
+        $voA = FloatVO::fromValue($valueA);
+        $voB = FloatVO::fromValue($valueB);
+        $voA->add($voB);
+
+        $this->assertEquals(
+            $valueA,
+            $voA->value()
         );
     }
 }
