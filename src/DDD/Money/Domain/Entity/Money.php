@@ -9,26 +9,42 @@ use App\DDD\Money\Domain\ValueObject\CurrencyVO;
 
 class Money
 {
-    private CurrencyVO $currencyVO;
-    private AmountVO $amountVO;
+    private CurrencyVO $currency;
+    private AmountVO $amount;
 
     /**
-     * @param CurrencyVO $currencyVO
-     * @param AmountVO $amountVO
+     * @param CurrencyVO $currency
+     * @param AmountVO $amount
      */
-    private function __construct(CurrencyVO $currencyVO, AmountVO $amountVO)
+    private function __construct(CurrencyVO $currency, AmountVO $amount)
     {
-        $this->currencyVO = $currencyVO;
-        $this->amountVO = $amountVO;
+        $this->currency = $currency;
+        $this->amount = $amount;
     }
 
     /**
-     * @param CurrencyVO $currencyVO
-     * @param AmountVO $amountVO
+     * @param CurrencyVO $currency
+     * @param AmountVO $amount
      * @return self
      */
-    public static function instantiate(CurrencyVO $currencyVO, AmountVO $amountVO): self
+    public static function instantiate(CurrencyVO $currency, AmountVO $amount): self
     {
-        return new static($currencyVO, $amountVO);
+        return new static($currency, $amount);
+    }
+
+    /**
+     * @return CurrencyVo
+     */
+    public function currency(): CurrencyVo
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @return AmountVO
+     */
+    public function amount(): AmountVO
+    {
+        return $this->amount;
     }
 }
