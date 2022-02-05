@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DDD\Money\Domain\Entity;
 
+use InvalidArgumentException;
 use App\DDD\Money\Domain\ValueObject\AmountVO;
 use App\DDD\Money\Domain\ValueObject\CurrencyVO;
 
@@ -46,5 +47,31 @@ class Money
     public function amount(): AmountVO
     {
         return $this->amount;
+    }
+
+    /**
+     * @param Money $otherMoney
+     * @return boolean
+     */
+    public function equal(Money $otherMoney): bool
+    {
+        return $this->currency->equal($otherMoney->currency()) && $this->amount->equal($otherMoney->amount());
+    }
+
+    /**
+     * @param Money $otherMoney
+     * @return self
+     * @throws InvalidArgumentException
+     */
+    public function add(Money $otherMoney): self
+    {
+        if (!$this->currency->equal($otherMoney->currency())) {
+            throw new InvalidArgumentException();
+        }
+
+        return $this->instantiate(
+            $this->currency(),
+            $this->amount->add($otherMoney->amount())
+        );
     }
 }
