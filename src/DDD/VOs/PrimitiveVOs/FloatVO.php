@@ -63,4 +63,19 @@ class FloatVO
     {
         return $this->value === $vo->value();
     }
+
+    /**
+     * @param FloatVO $vo
+     * @return self
+     */
+    public function add(FloatVO $vo): self
+    {
+        return $this->fromValue(
+            (float)bcdiv(
+                (string)($this->value + $vo->value),
+                '1',
+                self::DECIMAL_DIGITS
+            )
+        );
+    }
 }

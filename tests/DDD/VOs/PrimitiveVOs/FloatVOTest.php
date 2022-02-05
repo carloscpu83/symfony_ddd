@@ -6,6 +6,7 @@ namespace App\tests\DDD\VOs\PrimitiveVOs;
 
 use App\DDD\VOs\PrimitiveVOs\FloatVO;
 use PHPUnit\Framework\TestCase;
+use Faker\Factory;
 
 class FloatVOTest extends TestCase
 {
@@ -14,9 +15,11 @@ class FloatVOTest extends TestCase
      */
     public function testInstanceOf(): void
     {
+        $faker = Factory::create();
+
         $this->assertInstanceOf(
             FloatVO::class,
-            FloatVO::fromValue(1.123456)
+            FloatVO::fromValue($faker->randomFloat(3))
         );
     }
 
@@ -25,7 +28,10 @@ class FloatVOTest extends TestCase
      */
     public function testIsFloatValue(): void
     {
-        $float = FloatVO::fromValue(1.123456);
+        $faker = Factory::create();
+
+        $float = FloatVO::fromValue($faker->randomFloat(3));
+
         $this->assertIsFloat($float->value());
     }
 
@@ -34,8 +40,13 @@ class FloatVOTest extends TestCase
      */
     public function testLargeDecimals(): void
     {
-        $float = FloatVO::fromValue(1.123456);
-        $this->assertEquals($float->value(), 1.12);
+        $faker = Factory::create();
+
+        $longValue = $faker->randomFloat(3);
+        $shotValue = (float)bcdiv((string)$longValue, '1', 2);
+        $float = FloatVO::fromValue($longValue);
+
+        $this->assertEquals($float->value(), $shotValue);
     }
 
     /**
@@ -43,8 +54,13 @@ class FloatVOTest extends TestCase
      */
     public function testShortDecimals(): void
     {
-        $float = FloatVO::fromValue(1.1);
-        $this->assertEquals($float->value(), 1.10);
+        $faker = Factory::create();
+
+        $shortValue = $faker->randomFloat(1);
+        $longValue = (float)bcdiv((string)$shortValue, '1', 2);
+        $float = FloatVO::fromValue($shortValue);
+
+        $this->assertEquals($float->value(), (float)$longValue);
     }
 
     /**
@@ -52,8 +68,15 @@ class FloatVOTest extends TestCase
      */
     public function testWithoutDecimals(): void
     {
-        $float = FloatVO::fromValue(1);
-        $this->assertEquals($float->value(), 1.00);
+        $faker = Factory::create();
+
+        $value = $faker->randomFloat(0);
+        $float = FloatVO::fromValue($value);
+
+        $this->assertEquals(
+            $float->value(),
+            (float)bcdiv((string)$value, '1', 2)
+        );
     }
 
     /**
@@ -61,8 +84,15 @@ class FloatVOTest extends TestCase
      */
     public function testWithoutDecimalsToString()
     {
-        $float = FloatVO::fromValue(1);
-        $this->assertEquals($float->__toString(), '1,00');
+        $faker = Factory::create();
+
+        $value = $faker->randomFloat(0);
+        $float = FloatVO::fromValue($value);
+
+        $this->assertEquals(
+            $float->__toString(),
+            number_format((float)bcdiv((string)$value, '1', 2), 2, ',', '')
+        );
     }
 
     /**
@@ -70,8 +100,15 @@ class FloatVOTest extends TestCase
      */
     public function testShortDecimalsToString(): void
     {
-        $float = FloatVO::fromValue(1.1);
-        $this->assertEquals($float->__toString(), '1,10');
+        $faker = Factory::create();
+
+        $value = $faker->randomFloat(1);
+        $float = FloatVO::fromValue($value);
+
+        $this->assertEquals(
+            $float->__toString(),
+            number_format((float)bcdiv((string)$value, '1', 2), 2, ',', '')
+        );
     }
 
     /**
@@ -79,8 +116,15 @@ class FloatVOTest extends TestCase
      */
     public function testLargeDecimalsToString(): void
     {
-        $float = FloatVO::fromValue(1.123456);
-        $this->assertEquals($float->__toString(), '1,12');
+        $faker = Factory::create();
+
+        $value = $faker->randomFloat(5);
+        $float = FloatVO::fromValue($value);
+
+        $this->assertEquals(
+            $float->__toString(),
+            number_format((float)bcdiv((string)$value, '1', 2), 2, ',', '')
+        );
     }
 
     /**
@@ -88,9 +132,12 @@ class FloatVOTest extends TestCase
      */
     public function testEqual(): void
     {
-        $value = 1.23456789;
+        $faker = Factory::create();
+
+        $value = $faker->randomFloat(5);
         $voA = FloatVO::fromValue($value);
         $voB = FloatVO::fromValue($value);
+
         $this->assertTrue($voA->equal($voB));
     }
 
@@ -99,10 +146,32 @@ class FloatVOTest extends TestCase
      */
     public function testNotEqual(): void
     {
-        $valueA = 1.23456789;
-        $valueB = 9.87654321;
+        $faker = Factory::create();
+
+        $valueA = $faker->randomFloat(3);
+        $valueB = $faker->randomFloat(4);
         $voA = FloatVO::fromValue($valueA);
         $voB = FloatVO::fromValue($valueB);
+
         $this->assertFalse($voA->equal($voB));
+    }
+
+    /**
+     * @return void
+     */
+    public function testAdd(): void
+    {
+        $faker = Factory::create();
+
+        $valueA = $faker->randomFloat(2);
+        $valueB = $faker->randomFloat(2);
+        $voA = FloatVO::fromValue($valueA);
+        $voB = FloatVO::fromValue($valueB);
+        $resultVo = $voA->add($voB);
+
+        $this->assertEquals(
+            (float)bcdiv((string)($valueA + $valueB), '1', 2),
+            $resultVo->value()
+        );
     }
 }
