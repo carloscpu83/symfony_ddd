@@ -39,8 +39,17 @@ final class AmountVO
      * @param AmountVO $amount
      * @return boolean
      */
-    public function equal(AmountVO $amount): bool
+    public function equal(AmountVO $otherAmount): bool
     {
-        return $this->floatVo->equal($amount->value());
+        return $this->floatVo->equal($otherAmount->value());
+    }
+
+    /**
+     * @param AmountVO $otherAmountVo
+     * @return self
+     */
+    public function add(AmountVO $otherAmount): self
+    {
+        return $this->fromFloatVo($this->floatVo->add($otherAmount->value()));
     }
 }

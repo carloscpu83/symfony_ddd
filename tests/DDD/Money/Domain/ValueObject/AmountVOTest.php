@@ -17,6 +17,7 @@ class AmountVOTest extends TestCase
     public function testInstanceOf(): void
     {
         $faker = Factory::create();
+
         $this->assertInstanceOf(
             AmountVO::class,
             AmountVO::fromFloatVo(FloatVO::fromValue($faker->randomFloat(2)))
@@ -29,7 +30,9 @@ class AmountVOTest extends TestCase
     public function testInstanceOfFloatVo(): void
     {
         $faker = Factory::create();
+
         $amount = AmountVO::fromFloatVo(FloatVO::fromValue($faker->randomFloat(2)));
+
         $this->assertInstanceOf(FloatVO::class, $amount->value());
     }
 
@@ -39,9 +42,11 @@ class AmountVOTest extends TestCase
     public function testEqual(): void
     {
         $faker = Factory::create();
+
         $floatNumber = $faker->randomFloat(2);
         $amountA = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumber));
         $amountB = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumber));
+
         $this->assertTrue($amountA->equal($amountB));
     }
 
@@ -51,10 +56,28 @@ class AmountVOTest extends TestCase
     public function testNotEqual(): void
     {
         $faker = Factory::create();
+
         $floatNumberA = $faker->randomFloat(2);
         $floatNumberB = $faker->randomFloat(2);
         $amountA = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberA));
         $amountB = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberB));
+
         $this->assertFalse($amountA->equal($amountB));
+    }
+
+    public function testAdd(): void
+    {
+        $faker = Factory::create();
+
+        $floatNumberA = $faker->randomFloat(2);
+        $floatNumberB = $faker->randomFloat(2);
+        $amountA = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberA));
+        $amountB = AmountVO::fromFloatVo(FloatVO::fromValue($floatNumberB));
+        $amountC = $amountA->add($amountB);
+
+        $this->assertEquals(
+            $amountC->value()->value(),
+            (float)bcdiv((string)($floatNumberA + $floatNumberB), '1', 2)
+        );
     }
 }
