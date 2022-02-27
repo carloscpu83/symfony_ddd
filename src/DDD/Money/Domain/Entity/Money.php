@@ -5,46 +5,46 @@ declare(strict_types=1);
 namespace App\DDD\Money\Domain\Entity;
 
 use InvalidArgumentException;
-use App\DDD\Money\Domain\ValueObject\AmountVO;
-use App\DDD\Money\Domain\ValueObject\CurrencyVO;
+use App\DDD\Money\Domain\ValueObject\Amount;
+use App\DDD\Money\Domain\ValueObject\Currency;
 
 class Money
 {
-    private CurrencyVO $currency;
-    private AmountVO $amount;
+    private Currency $currency;
+    private Amount $amount;
 
     /**
-     * @param CurrencyVO $currency
-     * @param AmountVO $amount
+     * @param Currency $currency
+     * @param Amount $amount
      */
-    private function __construct(CurrencyVO $currency, AmountVO $amount)
+    private function __construct(Currency $currency, Amount $amount)
     {
         $this->currency = $currency;
         $this->amount = $amount;
     }
 
     /**
-     * @param CurrencyVO $currency
-     * @param AmountVO $amount
+     * @param Currency $currency
+     * @param Amount $amount
      * @return self
      */
-    public static function instantiate(CurrencyVO $currency, AmountVO $amount): self
+    public static function instantiate(Currency $currency, Amount $amount): self
     {
         return new static($currency, $amount);
     }
 
     /**
-     * @return CurrencyVo
+     * @return Currency
      */
-    public function currency(): CurrencyVo
+    public function currency(): Currency
     {
         return $this->currency;
     }
 
     /**
-     * @return AmountVO
+     * @return Amount
      */
-    public function amount(): AmountVO
+    public function amount(): Amount
     {
         return $this->amount;
     }
@@ -55,7 +55,7 @@ class Money
      */
     public function equal(Money $otherMoney): bool
     {
-        return $this->currency->equal($otherMoney->currency()) && $this->amount->equal($otherMoney->amount());
+        return $this->currency->equal($otherMoney->currency()->primitiveValue()) && $this->amount->equal($otherMoney->amount()->primitiveValue());
     }
 
     /**

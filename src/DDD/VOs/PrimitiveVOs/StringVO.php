@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DDD\VOs\PrimitiveVOs;
 
-class StringVO
+abstract class StringVO
 {
     /**
      * @var string
@@ -17,14 +17,6 @@ class StringVO
     protected function __construct(string $value)
     {
         $this->value = $value;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->value;
     }
 
     /**
@@ -64,7 +56,7 @@ class StringVO
      * @param string $value
      * @return self
      */
-    public static function fromString(string $value): self
+    public static function fromValue(string $value): self
     {
         return new static($value);
     }

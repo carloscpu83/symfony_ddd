@@ -2,66 +2,56 @@
 
 declare(strict_types=1);
 
-namespace App\tests\DDD\VOs\PrimitiveVOs;
+namespace App\tests\Unit\DDD\VOs\PrimitiveVOs;
 
-use PHPUnit\Framework\TestCase;
-use App\DDD\VOs\PrimitiveVOs\IntegerVO;
 use Faker\Factory;
+use PHPUnit\Framework\TestCase;
+use App\DDD\VOs\GenericVOs\GenericIntegerVO;
+use App\Tests\Mother\DDD\VOs\PrimitiveVOs\IntegerVOMother;
 
 class IntegerVOTest extends TestCase
 {
-    /**
-     * @return void
-     */
     public function testInstanceOf(): void
     {
-        $this->assertInstanceOf(IntegerVO::class, IntegerVO::fromInt(15));
+        $this->assertInstanceOf(GenericIntegerVO::class, IntegerVOMother::random());
     }
 
-    /**
-     * @return void
-     */
     public function testValueIsEqual(): void
     {
         $faker = Factory::create();
+
         $fakerValue = $faker->randomNumber();
-        $integerVO = IntegerVO::fromInt($fakerValue);
+        $integerVO = IntegerVOMother::create($fakerValue);
+
         $this->assertEquals($fakerValue, $integerVO->value());
     }
 
-    /**
-     * @return void
-     */
     public function testValueIsStringEqual(): void
     {
         $faker = Factory::create();
+
         $fakerValue = $faker->randomNumber();
-        $integerVO = IntegerVO::fromInt($fakerValue);
+        $integerVO = IntegerVOMother::create($fakerValue);
+
         $this->assertEquals((string)$fakerValue, $integerVO->__toString());
     }
 
-    /**
-     * @return void
-     */
     public function testEqual(): void
     {
         $faker = Factory::create();
+
         $value = $faker->randomNumber();
-        $voA = IntegerVO::fromInt($value);
-        $voB = IntegerVO::fromInt($value);
+        $voA = IntegerVOMother::create($value);
+        $voB = IntegerVOMother::create($value);
+
         $this->assertTrue($voA->equal($voB));
     }
 
-    /**
-     * @return void
-     */
     public function testNotEqual(): void
     {
-        $faker = Factory::create();
-        $valueA = $faker->randomNumber();
-        $valueB = $faker->randomNumber();
-        $voA = IntegerVO::fromInt($valueA);
-        $voB = IntegerVO::fromInt($valueB);
+        $voA = IntegerVOMother::random();
+        $voB = IntegerVOMother::random();
+
         $this->assertFalse($voA->equal($voB));
     }
 }

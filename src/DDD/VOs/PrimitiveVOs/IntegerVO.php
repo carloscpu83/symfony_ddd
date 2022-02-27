@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DDD\VOs\PrimitiveVOs;
 
-class IntegerVO
+abstract class IntegerVO
 {
     /**
      * @var int
@@ -31,7 +31,7 @@ class IntegerVO
      * @param integer $value
      * @return self
      */
-    public static function fromInt(int $value): self
+    public static function fromValue(int $value): self
     {
         return new static($value);
     }

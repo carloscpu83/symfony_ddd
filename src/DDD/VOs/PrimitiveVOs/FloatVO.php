@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DDD\VOs\PrimitiveVOs;
 
-class FloatVO
+abstract class FloatVO
 {
     private const DECIMAL_DIGITS = 2;
 
