@@ -22,7 +22,7 @@ abstract class IntegerVO
     /**
      * @return integer
      */
-    public function value(): int
+    public function primitiveValue(): int
     {
         return $this->value;
     }
@@ -31,7 +31,7 @@ abstract class IntegerVO
      * @param integer $value
      * @return self
      */
-    public static function fromValue(int $value): self
+    public static function fromPrimitiveValue(int $value): self
     {
         return new static($value);
     }

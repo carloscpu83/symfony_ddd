@@ -47,7 +47,7 @@ abstract class StringVO
     /**
      * @return string
      */
-    public function value(): string
+    public function primitiveValue(): string
     {
         return $this->value;
     }
@@ -56,7 +56,7 @@ abstract class StringVO
      * @param string $value
      * @return self
      */
-    public static function fromValue(string $value): self
+    public static function fromPrimitiveValue(string $value): self
     {
         return new static($value);
     }
