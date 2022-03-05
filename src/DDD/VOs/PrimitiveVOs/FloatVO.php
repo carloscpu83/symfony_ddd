@@ -11,7 +11,7 @@ abstract class FloatVO
     /**
      * @var float
      */
-    protected $value;
+    private $value;
 
     /**
      * @param float $value

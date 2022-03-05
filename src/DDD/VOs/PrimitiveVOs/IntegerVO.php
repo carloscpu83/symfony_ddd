@@ -9,7 +9,7 @@ abstract class IntegerVO
     /**
      * @var int
      */
-    protected $value;
+    private $value;
 
     /**
      * @param int $value

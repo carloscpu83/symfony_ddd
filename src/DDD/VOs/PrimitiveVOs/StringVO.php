@@ -9,7 +9,7 @@ abstract class StringVO
     /**
      * @var string
      */
-    protected $value;
+    private $value;
 
     /**
      * @param string $value
