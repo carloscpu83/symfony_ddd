@@ -9,7 +9,7 @@ abstract class StringVO
     /**
      * @var string
      */
-    private $value;
+    protected $value;
 
     /**
      * @param string $value
@@ -47,7 +47,7 @@ abstract class StringVO
     /**
      * @return string
      */
-    public function primitiveValue(): string
+    public function value(): string
     {
         return $this->value;
     }
@@ -56,17 +56,17 @@ abstract class StringVO
      * @param string $value
      * @return self
      */
-    public static function fromPrimitiveValue(string $value): self
+    public static function fromValue(string $value): self
     {
         return new static($value);
     }
 
     /**
-     * @param StringVO $vo
+     * @param string $value
      * @return boolean
      */
-    public function equal(StringVO $vo): bool
+    public function equal(string $value): bool
     {
-        return $this->value === $vo->value();
+        return $this->value === $value;
     }
 }

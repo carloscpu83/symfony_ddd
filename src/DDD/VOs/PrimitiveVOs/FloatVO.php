@@ -11,7 +11,7 @@ abstract class FloatVO
     /**
      * @var float
      */
-    private $value;
+    protected $value;
 
     /**
      * @param float $value
@@ -34,7 +34,7 @@ abstract class FloatVO
      * @param float $value
      * @return self
      */
-    public static function fromPrimitiveValue(float $value): self
+    public static function fromValue(float $value): self
     {
         return new static($value);
     }
@@ -42,7 +42,7 @@ abstract class FloatVO
     /**
      * @return float
      */
-    public function primitiveValue(): float
+    public function value(): float
     {
         return $this->value;
     }
@@ -56,23 +56,23 @@ abstract class FloatVO
     }
 
     /**
-     * @param FloatVO $vo
+     * @param float $value
      * @return boolean
      */
-    public function equal(FloatVO $vo): bool
+    public function equal(float $value): bool
     {
-        return $this->value === $vo->value();
+        return $this->value === $value;
     }
 
     /**
-     * @param FloatVO $vo
+     * @param float $value
      * @return self
      */
-    public function add(FloatVO $vo): self
+    public function add(float $value): self
     {
         return $this->fromValue(
             (float)bcdiv(
-                (string)($this->value + $vo->value),
+                (string)($this->value + $value),
                 '1',
                 self::DECIMAL_DIGITS
             )

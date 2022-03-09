@@ -78,45 +78,46 @@ class MoneyTest extends TestCase
     /**
      * @return void
      */
-   /*  public function testNotEqual(): void
+    public function testNotEqual(): void
     {
         $faker = Factory::create();
 
         $moneyA = Money::instantiate(
-            Currency::fromString(StringVO::fromString('USD')),
-            Amount::fromFloatVo(FloatVO::fromValue($faker->randomFloat(2)))
+            CurrencyMother::random(),
+            AmountMother::random()
         );
         $moneyB = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($faker->randomFloat(2)))
+            CurrencyMother::random(),
+            AmountMother::random()
         );
         $this->assertFalse($moneyA->equal($moneyB));
     }
- */
+
     /**
      * @return void
      */
-  /*   public function testAddEqualCurrencies(): void
+    public function testAddEqualCurrencies(): void
     {
         $faker = Factory::create();
 
         $floatA = $faker->randomFloat(2);
         $floatB = $floatA + 1;
+        $currency = CurrencyMother::random();
         $moneyA = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatA))
+            $currency,
+            AmountMother::create($floatA)
         );
         $moneyB = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatB))
+            $currency,
+            AmountMother::create($floatB)
         );
         $moneyC = $moneyA->add($moneyB);
 
         $this->assertEquals(
-            $moneyC->amount()->value()->value(),
+            $moneyC->amount()->value(),
             (float)bcdiv((string)($floatA + $floatB), '1', 2)
         );
-    } */
+    }
 
     /**
      * @return void

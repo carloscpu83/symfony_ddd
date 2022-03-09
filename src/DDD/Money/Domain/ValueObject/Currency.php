@@ -9,35 +9,33 @@ use App\DDD\VOs\PrimitiveVOs\StringVO;
 
 final class Currency extends StringVO
 {
-    private StringVO $stringVo;
-
     /**
-     * @return StringVO
+     * @param string $value
      */
-    public function primitiveValue(): StringVO
+    private function __construct(string $value)
     {
-        return $this->stringVo;
-    }
-
-
-    /**
-     * @param StringVO $stringVO
-     */
-    private function __construct(StringVO $stringVO)
-    {
-        $this->stringVo = $stringVO;
+        $this->value = $value;
     }
 
     /**
-     * @param StringVO $stringVO
-     * @throws InvalidArgumentException
+     * @param string $value
      * @return self
      */
-    public static function fromString(StringVO $stringVO): self
+    public static function fromString(string $value): self
     {
-        self::checkIsoCode($stringVO->value());
-        return new static($stringVO);
+        self::checkIsoCode($value);
+        return new static($value);
     }
+
+    /**
+     * @param Currency $currency
+     * @return boolean
+     */
+    public function equals(Currency $currency): bool
+    {
+        return $this->equal($currency->value());
+    }
+
 
     /**
      * @param string $anIsoCode

@@ -6,7 +6,6 @@ namespace App\Tests\Mother\DDD\Money\Domain\ValueObject;
 
 use Faker\Factory;
 use App\DDD\Money\Domain\ValueObject\Amount;
-use App\Tests\Mother\DDD\VOs\PrimitiveVOs\FloatVOMother;
 
 final class AmountMother
 {
@@ -16,7 +15,7 @@ final class AmountMother
      */
     public static function create(float $value): Amount
     {
-        return Amount::fromFloat(FloatVOMother::create($value));
+        return Amount::fromFloat($value);
     }
 
     /**

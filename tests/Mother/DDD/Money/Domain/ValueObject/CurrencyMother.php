@@ -6,7 +6,6 @@ namespace App\Tests\Mother\DDD\Money\Domain\ValueObject;
 
 use Faker\Factory;
 use App\DDD\Money\Domain\ValueObject\Currency;
-use App\Tests\Mother\DDD\VOs\PrimitiveVOs\StringVOMother;
 
 final class CurrencyMother
 {
@@ -16,7 +15,7 @@ final class CurrencyMother
      */
     public static function create(string $value): Currency
     {
-        return Currency::fromString(StringVOMother::create($value));
+        return Currency::fromString($value);
     }
 
     /**

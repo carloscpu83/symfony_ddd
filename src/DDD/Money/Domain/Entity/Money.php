@@ -55,7 +55,7 @@ class Money
      */
     public function equal(Money $otherMoney): bool
     {
-        return $this->currency->equal($otherMoney->currency()->primitiveValue()) && $this->amount->equal($otherMoney->amount()->primitiveValue());
+        return $this->currency->equals($otherMoney->currency()) && $this->amount->equals($otherMoney->amount());
     }
 
     /**
@@ -65,7 +65,7 @@ class Money
      */
     public function add(Money $otherMoney): self
     {
-        if (!$this->currency->equal($otherMoney->currency())) {
+        if (!$this->currency->equal($otherMoney->currency()->value())) {
             throw new InvalidArgumentException();
         }
 

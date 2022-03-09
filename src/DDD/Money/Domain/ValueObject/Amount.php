@@ -8,30 +8,29 @@ use App\DDD\VOs\PrimitiveVOs\FloatVO;
 
 final class Amount extends FloatVO
 {
-    private FloatVO $floatVo;
-
     /**
-     * @return FloatVO
+     * @param float $value
      */
-    public function primitiveValue(): FloatVO
+    private function __construct(float $value)
     {
-        return $this->floatVo;
+        $this->value = $value;
     }
 
     /**
-     * @param FloatVO $floatVo
-     */
-    private function __construct(FloatVO $floatVo)
-    {
-        $this->floatVo = $floatVo;
-    }
-
-    /**
-     * @param FloatVO $floatVo
+     * @param float $value
      * @return self
      */
-    public static function fromFloat(FloatVO $floatVo): self
+    public static function fromFloat(float $value): self
     {
-        return new static($floatVo);
+        return new static($value);
+    }
+
+    /**
+     * @param Amount $amount
+     * @return boolean
+     */
+    public function equals(Amount $amount): bool
+    {
+        return $this->equal($amount->value());
     }
 }
