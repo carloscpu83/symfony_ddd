@@ -114,7 +114,7 @@ class MoneyTest extends TestCase
         $moneyC = $moneyA->add($moneyB);
 
         $this->assertEquals(
-            $moneyC->amount()->value(),
+            $moneyC->amount()->primitiveValue(),
             (float)bcdiv((string)($floatA + $floatB), '1', 2)
         );
     }
@@ -122,41 +122,43 @@ class MoneyTest extends TestCase
     /**
      * @return void
      */
-/*     public function testAddNotEqualCurrencies(): void
+    public function testAddNotEqualCurrencies(): void
     {
         $faker = Factory::create();
 
         $floatA = $faker->randomFloat(2);
         $floatB = $floatA + 1;
         $moneyA = Money::instantiate(
-            Currency::fromString(StringVO::fromString('USD')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatA))
+            Currency::fromString('USD'),
+            Amount::fromFloat($floatA)
         );
         $moneyB = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatB))
+            Currency::fromString('EUR'),
+            Amount::fromFloat($floatB)
         );
 
         $this->expectException(InvalidArgumentException::class);
         $moneyA->add($moneyB);
-    } */
+    }
 
     /**
      * @return void
      */
- /*    public function testCheckReplaceability(): void
+    public function testCheckReplaceability(): void
     {
         $faker = Factory::create();
 
         $floatA = $faker->randomFloat(2);
         $floatB = $floatA + 1;
+        $currencyValue = 'EUR';
+
         $moneyA = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatA))
+            Currency::fromString($currencyValue),
+            Amount::fromFloat($floatA)
         );
         $moneyB = Money::instantiate(
-            Currency::fromString(StringVO::fromString('EUR')),
-            Amount::fromFloatVo(FloatVO::fromValue($floatB))
+            Currency::fromString($currencyValue),
+            Amount::fromFloat($floatB)
         );
         $moneyA->add($moneyB);
 
@@ -164,5 +166,5 @@ class MoneyTest extends TestCase
             $moneyA->amount()->value()->value(),
             $floatA
         );
-    } */
+    }
 }

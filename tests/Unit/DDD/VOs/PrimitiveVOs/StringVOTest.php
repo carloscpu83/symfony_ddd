@@ -15,9 +15,9 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = $faker->word();
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
-        $this->assertEquals($word, $genericString->value());
+        $this->assertEquals($word, $genericString->primitiveValue());
     }
 
     public function testStringIsLower(): void
@@ -25,7 +25,7 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = strtolower($faker->word());
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
         $this->assertEquals($word, $genericString->toLower());
     }
@@ -35,7 +35,7 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = strtoupper($faker->word());
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
         $this->assertNotEquals($word, $genericString->toLower());
     }
@@ -45,7 +45,7 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = strtoupper($faker->word());
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
         $this->assertEquals($word, $genericString->toUpper());
     }
@@ -55,7 +55,7 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = strtolower($faker->word());
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
         $this->assertNotEquals($word, $genericString->toUpper());
     }
@@ -65,7 +65,7 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $word = ucfirst(strtolower($faker->word()));
-        $genericString = GenericStringVO::fromValue($word);
+        $genericString = GenericStringVO::fromPrimitiveValue($word);
 
         $this->assertEquals($word, $genericString->capitalize());
     }
@@ -75,19 +75,19 @@ class StringVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->word();
-        $voA = GenericStringVO::fromValue($value);
-        $voB = GenericStringVO::fromValue($value);
+        $voA = GenericStringVO::fromPrimitiveValue($value);
+        $voB = GenericStringVO::fromPrimitiveValue($value);
 
-        $this->assertTrue($voA->equal($voB));
+        $this->assertTrue($voA->equal($voB->primitiveValue()));
     }
 
     public function testNotEqual(): void
     {
         $faker = Factory::create();
 
-        $voA = GenericStringVO::fromValue($faker->word());
-        $voB = GenericStringVO::fromValue($faker->word());
+        $voA = GenericStringVO::fromPrimitiveValue($faker->word());
+        $voB = GenericStringVO::fromPrimitiveValue($faker->word());
 
-        $this->assertFalse($voA->equal($voB));
+        $this->assertFalse($voA->equal($voB->primitiveValue()));
     }
 }

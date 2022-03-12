@@ -31,6 +31,12 @@ final class Amount extends FloatVO
      */
     public function equals(Amount $amount): bool
     {
-        return $this->equal($amount->value());
+        return $this->equal($amount->primitiveValue());
+    }
+
+    public function add(Amount $amount): self
+    {
+        //return self::fromFloat($this->addPrimitive($amount->primitiveValue())->primitiveValue());
+        return new static($this->addPrimitive($amount->primitiveValue())->primitiveValue());
     }
 }

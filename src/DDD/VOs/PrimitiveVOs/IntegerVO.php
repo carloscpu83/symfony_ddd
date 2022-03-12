@@ -45,11 +45,11 @@ abstract class IntegerVO
     }
 
     /**
-     * @param IntegerVO $vo
+     * @param integer $value
      * @return boolean
      */
-    public function equal(IntegerVO $vo): bool
+    public function equal(int $value): bool
     {
-        return $this->value === $vo->value();
+        return $this->value === $value;
     }
 }

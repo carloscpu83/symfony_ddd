@@ -33,7 +33,7 @@ final class Currency extends StringVO
      */
     public function equals(Currency $currency): bool
     {
-        return $this->equal($currency->value());
+        return $this->equal($currency->primitiveValue());
     }
 
 

@@ -34,7 +34,7 @@ abstract class FloatVO
      * @param float $value
      * @return self
      */
-    public static function fromValue(float $value): self
+    public static function fromPrimitiveValue(float $value): self
     {
         return new static($value);
     }
@@ -42,7 +42,7 @@ abstract class FloatVO
     /**
      * @return float
      */
-    public function value(): float
+    public function primitiveValue(): float
     {
         return $this->value;
     }
@@ -68,9 +68,9 @@ abstract class FloatVO
      * @param float $value
      * @return self
      */
-    public function add(float $value): self
+    public function addPrimitive(float $value): self
     {
-        return $this->fromValue(
+        return $this->fromPrimitiveValue(
             (float)bcdiv(
                 (string)($this->value + $value),
                 '1',

@@ -65,7 +65,7 @@ class Money
      */
     public function add(Money $otherMoney): self
     {
-        if (!$this->currency->equal($otherMoney->currency()->value())) {
+        if (!$this->currency->equal($otherMoney->currency()->primitiveValue())) {
             throw new InvalidArgumentException();
         }
 

@@ -7,23 +7,17 @@ namespace App\tests\Unit\DDD\VOs\PrimitiveVOs;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 use App\DDD\VOs\GenericVOs\GenericIntegerVO;
-use App\Tests\Mother\DDD\VOs\PrimitiveVOs\IntegerVOMother;
 
 class IntegerVOTest extends TestCase
 {
-    public function testInstanceOf(): void
-    {
-        $this->assertInstanceOf(GenericIntegerVO::class, IntegerVOMother::random());
-    }
-
     public function testValueIsEqual(): void
     {
         $faker = Factory::create();
 
         $fakerValue = $faker->randomNumber();
-        $integerVO = IntegerVOMother::create($fakerValue);
+        $integerVO = GenericIntegerVO::fromPrimitiveValue($fakerValue);
 
-        $this->assertEquals($fakerValue, $integerVO->value());
+        $this->assertEquals($fakerValue, $integerVO->primitiveValue());
     }
 
     public function testValueIsStringEqual(): void
@@ -31,7 +25,7 @@ class IntegerVOTest extends TestCase
         $faker = Factory::create();
 
         $fakerValue = $faker->randomNumber();
-        $integerVO = IntegerVOMother::create($fakerValue);
+        $integerVO = GenericIntegerVO::fromPrimitiveValue($fakerValue);
 
         $this->assertEquals((string)$fakerValue, $integerVO->__toString());
     }
@@ -41,17 +35,20 @@ class IntegerVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomNumber();
-        $voA = IntegerVOMother::create($value);
-        $voB = IntegerVOMother::create($value);
+        $voA = GenericIntegerVO::fromPrimitiveValue($value);
+        $voB = GenericIntegerVO::fromPrimitiveValue($value);
 
-        $this->assertTrue($voA->equal($voB));
+        $this->assertTrue($voA->equal($voB->primitiveValue()));
     }
 
     public function testNotEqual(): void
     {
-        $voA = IntegerVOMother::random();
-        $voB = IntegerVOMother::random();
+        $faker = Factory::create();
+        $testNumber = $faker->randomNumber();
 
-        $this->assertFalse($voA->equal($voB));
+        $voA = GenericIntegerVO::fromPrimitiveValue($testNumber);
+        $voB = GenericIntegerVO::fromPrimitiveValue($testNumber + 1);
+
+        $this->assertFalse($voA->equal($voB->primitiveValue()));
     }
 }

@@ -15,9 +15,9 @@ class FloatVOTest extends TestCase
     {
         $faker = Factory::create();
 
-        $genericFloat = GenericFloatVO::fromValue($faker->randomFloat(2));
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($faker->randomFloat(2));
 
-        $this->assertIsFloat($genericFloat->value());
+        $this->assertIsFloat($genericFloat->primitiveValue());
     }
 
     public function testLargeDecimals(): void
@@ -26,9 +26,9 @@ class FloatVOTest extends TestCase
 
         $longValue = $faker->randomFloat(3);
         $shotValue = (float)bcdiv((string)$longValue, '1', 2);
-        $genericFloat = GenericFloatVO::fromValue($longValue);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($longValue);
 
-        $this->assertEquals($genericFloat->value(), $shotValue);
+        $this->assertEquals($genericFloat->primitiveValue(), $shotValue);
     }
 
     public function testShortDecimals(): void
@@ -37,9 +37,9 @@ class FloatVOTest extends TestCase
 
         $shortValue = $faker->randomFloat(1);
         $longValue = (float)bcdiv((string)$shortValue, '1', 2);
-        $genericFloat = GenericFloatVO::fromValue($shortValue);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($shortValue);
 
-        $this->assertEquals($genericFloat->value(), (float)$longValue);
+        $this->assertEquals($genericFloat->primitiveValue(), (float)$longValue);
     }
 
     public function testWithoutDecimals(): void
@@ -47,10 +47,10 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomFloat(0);
-        $genericFloat = GenericFloatVO::fromValue($value);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($value);
 
         $this->assertEquals(
-            $genericFloat->value(),
+            $genericFloat->primitiveValue(),
             (float)bcdiv((string)$value, '1', 2)
         );
     }
@@ -60,7 +60,7 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomFloat(0);
-        $genericFloat = GenericFloatVO::fromValue($value);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($value);
 
         $this->assertEquals(
             $genericFloat->__toString(),
@@ -73,7 +73,7 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomFloat(1);
-        $genericFloat = GenericFloatVO::fromValue($value);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($value);
 
         $this->assertEquals(
             $genericFloat->__toString(),
@@ -86,7 +86,7 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomFloat(5);
-        $genericFloat = GenericFloatVO::fromValue($value);
+        $genericFloat = GenericFloatVO::fromPrimitiveValue($value);
 
         $this->assertEquals(
             $genericFloat->__toString(),
@@ -99,10 +99,10 @@ class FloatVOTest extends TestCase
         $faker = Factory::create();
 
         $value = $faker->randomFloat(5);
-        $voA = GenericFloatVO::fromValue($value);
-        $voB = GenericFloatVO::fromValue($value);
+        $voA = GenericFloatVO::fromPrimitiveValue($value);
+        $voB = GenericFloatVO::fromPrimitiveValue($value);
 
-        $this->assertTrue($voA->equal($voB->value()));
+        $this->assertTrue($voA->equal($voB->primitiveValue()));
     }
 
     public function testNotEqual(): void
@@ -111,10 +111,10 @@ class FloatVOTest extends TestCase
 
         $valueA = $faker->randomFloat(3);
         $valueB = $valueA + 1;
-        $voA = GenericFloatVO::fromValue($valueA);
-        $voB = GenericFloatVO::fromValue($valueB);
+        $voA = GenericFloatVO::fromPrimitiveValue($valueA);
+        $voB = GenericFloatVO::fromPrimitiveValue($valueB);
 
-        $this->assertFalse($voA->equal($voB->value()));
+        $this->assertFalse($voA->equal($voB->primitiveValue()));
     }
 
     public function testAdd(): void
@@ -123,13 +123,13 @@ class FloatVOTest extends TestCase
 
         $valueA = $faker->randomFloat(2);
         $valueB = $valueA + 1;
-        $voA = GenericFloatVO::fromValue($valueA);
-        $voB = GenericFloatVO::fromValue($valueB);
-        $resultVo = $voA->add($voB->value());
+        $voA = GenericFloatVO::fromPrimitiveValue($valueA);
+        $voB = GenericFloatVO::fromPrimitiveValue($valueB);
+        $resultVo = $voA->addPrimitive($voB->primitiveValue());
 
         $this->assertEquals(
             (float)bcdiv((string)($valueA + $valueB), '1', 2),
-            $resultVo->value()
+            $resultVo->primitiveValue()
         );
     }
 
@@ -139,13 +139,13 @@ class FloatVOTest extends TestCase
 
         $valueA = $faker->randomFloat(2);
         $valueB = $valueA + 1;
-        $voA = GenericFloatVO::fromValue($valueA);
-        $voB = GenericFloatVO::fromValue($valueB);
-        $voA->add($voB->value());
+        $voA = GenericFloatVO::fromPrimitiveValue($valueA);
+        $voB = GenericFloatVO::fromPrimitiveValue($valueB);
+        $voA->addPrimitive($voB->primitiveValue());
 
         $this->assertEquals(
             $valueA,
-            $voA->value()
+            $voA->primitiveValue()
         );
     }
 }
