@@ -14,7 +14,7 @@ final class Currency extends StringVO
      */
     private function __construct(string $value)
     {
-        $this->value = $value;
+        parent::__construct($value);
     }
 
     /**

@@ -13,7 +13,7 @@ final class Amount extends FloatVO
      */
     private function __construct(float $value)
     {
-        $this->value = $value;
+        parent::__construct($value);
     }
 
     /**
@@ -34,9 +34,13 @@ final class Amount extends FloatVO
         return $this->equal($amount->primitiveValue());
     }
 
-    public function add(Amount $amount): self
+    /**
+     * @param Amount $amount
+     * @return self
+     */
+    public function add(Amount $amount)
     {
         //return self::fromFloat($this->addPrimitive($amount->primitiveValue())->primitiveValue());
-        return new static($this->addPrimitive($amount->primitiveValue())->primitiveValue());
+        $this->value = $this->addPrimitive($amount->primitiveValue())->primitiveValue();
     }
 }

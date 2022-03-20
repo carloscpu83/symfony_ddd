@@ -8,7 +8,6 @@ use Faker\Factory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use App\DDD\Money\Domain\ValueObject\Currency;
-use App\Tests\Mother\DDD\Money\Domain\ValueObject\CurrencyMother;
 
 class CurrencyTest extends TestCase
 {
@@ -17,9 +16,11 @@ class CurrencyTest extends TestCase
      */
     public function testInstanceOf(): void
     {
+        $faker = Factory::create();
+
         $this->assertInstanceOf(
             Currency::class,
-            CurrencyMother::random()
+            Currency::fromString($faker->randomElement(['USD', 'EUR']))
         );
     }
 
@@ -31,7 +32,7 @@ class CurrencyTest extends TestCase
         $faker = Factory::create();
 
         $this->expectException(InvalidArgumentException::class);
-        CurrencyMother::create($faker->word());
+        Currency::fromString($faker->word());
     }
 
     /**
@@ -42,8 +43,8 @@ class CurrencyTest extends TestCase
         $faker = Factory::create();
 
         $word = $faker->randomElement(['USD', 'EUR']);
-        $voA = CurrencyMother::create($word);
-        $voB = CurrencyMother::create($word);
+        $voA = Currency::fromString($word);
+        $voB = Currency::fromString($word);
 
         $this->assertTrue($voA->equals($voB));
     }
@@ -53,8 +54,8 @@ class CurrencyTest extends TestCase
      */
     public function testNotEquals(): void
     {
-        $voA = CurrencyMother::create('USD');
-        $voB = CurrencyMother::create('EUR');
+        $voA = Currency::fromString('USD');
+        $voB = Currency::fromString('EUR');
 
         $this->assertFalse($voA->equals($voB));
     }

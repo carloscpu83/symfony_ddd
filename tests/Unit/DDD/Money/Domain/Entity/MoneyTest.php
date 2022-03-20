@@ -7,13 +7,12 @@ namespace App\DDD\Money\Domain\Entity;
 use Faker\Factory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use App\DDD\VOs\PrimitiveVOs\FloatVO;
 use App\DDD\Money\Domain\Entity\Money;
-use App\DDD\VOs\PrimitiveVOs\StringVO;
 use App\DDD\Money\Domain\ValueObject\Amount;
 use App\DDD\Money\Domain\ValueObject\Currency;
 use App\Tests\Mother\DDD\Money\Domain\ValueObject\AmountMother;
 use App\Tests\Mother\DDD\Money\Domain\ValueObject\CurrencyMother;
+use App\Tests\Mother\DDD\Money\Domain\ValueObject\UuidMother;
 
 class MoneyTest extends TestCase
 {
@@ -23,6 +22,7 @@ class MoneyTest extends TestCase
     public function testInstanceOf(): void
     {
         $money = Money::instantiate(
+            UuidMother::random(),
             CurrencyMother::random(),
             AmountMother::random()
         );
@@ -36,6 +36,7 @@ class MoneyTest extends TestCase
     public function testInstanceOfCurrency(): void
     {
         $money = Money::instantiate(
+            UuidMother::random(),
             CurrencyMother::random(),
             AmountMother::random()
         );
@@ -49,6 +50,7 @@ class MoneyTest extends TestCase
     public function testInstanceOfAmount(): void
     {
         $money = Money::instantiate(
+            UuidMother::random(),
             CurrencyMother::random(),
             AmountMother::random()
         );
@@ -61,13 +63,16 @@ class MoneyTest extends TestCase
      */
     public function testEqual(): void
     {
+        $uuid = UuidMother::random();
         $currency = CurrencyMother::random();
         $amount = AmountMother::random();
         $moneyA = Money::instantiate(
+            $uuid,
             $currency,
             $amount
         );
         $moneyB = Money::instantiate(
+            $uuid,
             $currency,
             $amount
         );
@@ -83,10 +88,12 @@ class MoneyTest extends TestCase
         $faker = Factory::create();
 
         $moneyA = Money::instantiate(
+            UuidMother::random(),
             CurrencyMother::random(),
             AmountMother::random()
         );
         $moneyB = Money::instantiate(
+            UuidMother::random(),
             CurrencyMother::random(),
             AmountMother::random()
         );
@@ -104,10 +111,12 @@ class MoneyTest extends TestCase
         $floatB = $floatA + 1;
         $currency = CurrencyMother::random();
         $moneyA = Money::instantiate(
+            UuidMother::random(),
             $currency,
             AmountMother::create($floatA)
         );
         $moneyB = Money::instantiate(
+            UuidMother::random(),
             $currency,
             AmountMother::create($floatB)
         );
@@ -129,10 +138,12 @@ class MoneyTest extends TestCase
         $floatA = $faker->randomFloat(2);
         $floatB = $floatA + 1;
         $moneyA = Money::instantiate(
+            UuidMother::random(),
             Currency::fromString('USD'),
             Amount::fromFloat($floatA)
         );
         $moneyB = Money::instantiate(
+            UuidMother::random(),
             Currency::fromString('EUR'),
             Amount::fromFloat($floatB)
         );
@@ -153,10 +164,12 @@ class MoneyTest extends TestCase
         $currencyValue = 'EUR';
 
         $moneyA = Money::instantiate(
+            UuidMother::random(),
             Currency::fromString($currencyValue),
             Amount::fromFloat($floatA)
         );
         $moneyB = Money::instantiate(
+            UuidMother::random(),
             Currency::fromString($currencyValue),
             Amount::fromFloat($floatB)
         );

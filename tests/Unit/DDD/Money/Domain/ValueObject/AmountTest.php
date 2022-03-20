@@ -7,7 +7,6 @@ namespace App\Tests\Unit\DDD\Money\Domain\ValueObject;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 use App\DDD\Money\Domain\ValueObject\Amount;
-use App\Tests\Mother\DDD\Money\Domain\ValueObject\AmountMother;
 
 class AmountTest extends TestCase
 {
@@ -16,9 +15,11 @@ class AmountTest extends TestCase
      */
     public function testInstanceOf(): void
     {
+        $faker = Factory::create();
+
         $this->assertInstanceOf(
             Amount::class,
-            AmountMother::random()
+            Amount::fromFloat($faker->randomFloat())
         );
     }
 
@@ -27,8 +28,8 @@ class AmountTest extends TestCase
         $faker = Factory::create();
 
         $amountValue = $faker->randomFloat(2);
-        $voA = AmountMother::create($amountValue);
-        $voB = AmountMother::create($amountValue);
+        $voA =  Amount::fromFloat($amountValue);
+        $voB =  Amount::fromFloat($amountValue);
 
         $this->assertTrue($voA->equals($voB));
     }
@@ -37,8 +38,8 @@ class AmountTest extends TestCase
     {
         $faker = Factory::create();
 
-        $voA = AmountMother::create($faker->randomFloat(2));
-        $voB = AmountMother::create($faker->randomFloat(2));
+        $voA = Amount::fromFloat($faker->randomFloat(2));
+        $voB = Amount::fromFloat($faker->randomFloat(2));
 
         $this->assertFalse($voA->equals($voB));
     }
@@ -48,8 +49,8 @@ class AmountTest extends TestCase
         $faker = Factory::create();
 
         $amountValue = $faker->randomFloat(2);
-        $voA = AmountMother::create($amountValue);
-        $voB = AmountMother::create($amountValue + 1);
+        $voA = Amount::fromFloat($amountValue);
+        $voB = Amount::fromFloat($amountValue + 1);
         $voC = $voA->add($voB);
 
         $this->assertEquals(

@@ -7,31 +7,45 @@ namespace App\DDD\Money\Domain\Entity;
 use InvalidArgumentException;
 use App\DDD\Money\Domain\ValueObject\Amount;
 use App\DDD\Money\Domain\ValueObject\Currency;
+use App\DDD\Money\Domain\ValueObject\Uuid;
 
 class Money
 {
+    private Uuid $uuid;
     private Currency $currency;
     private Amount $amount;
 
     /**
+     * @param Uuid $uuid
      * @param Currency $currency
      * @param Amount $amount
      */
-    private function __construct(Currency $currency, Amount $amount)
+    private function __construct(Uuid $uuid, Currency $currency, Amount $amount)
     {
+        $this->uuid = $uuid;
         $this->currency = $currency;
         $this->amount = $amount;
     }
 
     /**
+     * @param Uuid $uuid
      * @param Currency $currency
      * @param Amount $amount
      * @return self
      */
-    public static function instantiate(Currency $currency, Amount $amount): self
+    public static function instantiate(Uuid $uuid, Currency $currency, Amount $amount): self
     {
-        return new static($currency, $amount);
+        return new static($uuid, $currency, $amount);
     }
+
+    /**
+     * @return Uuid
+     */
+    public function uuid(): Uuid
+    {
+        return $this->uuid;
+    }
+
 
     /**
      * @return Currency
@@ -55,7 +69,9 @@ class Money
      */
     public function equal(Money $otherMoney): bool
     {
-        return $this->currency->equals($otherMoney->currency()) && $this->amount->equals($otherMoney->amount());
+        return $this->uuid->equals($otherMoney->uuid()) &&
+            $this->currency->equals($otherMoney->currency()) &&
+            $this->amount->equals($otherMoney->amount());
     }
 
     /**
@@ -70,6 +86,7 @@ class Money
         }
 
         return $this->instantiate(
+            $this->uuid,
             $this->currency(),
             $this->amount->add($otherMoney->amount())
         );
