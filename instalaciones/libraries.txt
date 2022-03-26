@@ -1,2 +1,3 @@
 composer require fzaninotto/faker --dev
 composer require ramsey/uuid
+composer require --dev mockery/mockery

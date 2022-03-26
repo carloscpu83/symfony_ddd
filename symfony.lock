@@ -91,8 +91,14 @@
     "fzaninotto/faker": {
         "version": "v1.9.2"
     },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.1"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "mockery/mockery": {
+        "version": "1.5.0"
     },
     "monolog/monolog": {
         "version": "2.3.5"
