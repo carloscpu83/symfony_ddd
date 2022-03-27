@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Mother\DDD\Money\Domain\Entity;
 
 use App\DDD\Money\Domain\Entity\Money;
-use App\DDD\Money\Domain\ValueObject\Uuid;
+use App\DDD\Shared\Domain\ValueObject\Uuid;
 use App\DDD\Money\Domain\ValueObject\Amount;
 use App\DDD\Money\Domain\ValueObject\Currency;
-use App\Tests\Mother\DDD\Money\Domain\ValueObject\UuidMother;
+use App\Tests\Mother\DDD\Shared\Domain\ValueObject\UuidMother;
 use App\Tests\Mother\DDD\Money\Domain\ValueObject\AmountMother;
 use App\Tests\Mother\DDD\Money\Domain\ValueObject\CurrencyMother;
 

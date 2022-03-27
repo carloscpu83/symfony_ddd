@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\DDD\Money\Domain\ValueObject;
+namespace App\Tests\Unit\DDD\Shared\ValueObject;
 
 use Faker\Factory;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use App\DDD\Money\Domain\ValueObject\Uuid;
+use App\DDD\Shared\Domain\ValueObject\Uuid;
 
 class UuidTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DDD\Money\Domain\ValueObject;
+namespace App\DDD\Shared\Domain\ValueObject;
 
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as UuidGenerator;

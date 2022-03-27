@@ -7,7 +7,7 @@ namespace App\DDD\Money\Domain\Entity;
 use InvalidArgumentException;
 use App\DDD\Money\Domain\ValueObject\Amount;
 use App\DDD\Money\Domain\ValueObject\Currency;
-use App\DDD\Money\Domain\ValueObject\Uuid;
+use App\DDD\Shared\Domain\ValueObject\Uuid;
 
 class Money
 {

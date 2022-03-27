@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Mother\DDD\Money\Domain\ValueObject;
+namespace App\Tests\Mother\DDD\Shared\Domain\ValueObject;
 
 use Faker\Factory;
-use App\DDD\Money\Domain\ValueObject\Uuid;
+use App\DDD\Shared\Domain\ValueObject\Uuid;
 
 class UuidMother
 {
