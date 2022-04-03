@@ -9,8 +9,7 @@ use App\DDD\Person\Domain\ValueObject\Password;
 
 class PasswordMother
 {
-    private const MIN_LENGTH = 5;
-    private const MAX_LENGTH = 20;
+    private const LENGTH = 32;
 
     /**
      * @param string $password
@@ -27,6 +26,6 @@ class PasswordMother
     public static function random(): Password
     {
         $faker = Factory::create();
-        return self::create($faker->password(self::MIN_LENGTH, self::MAX_LENGTH));
+        return self::create($faker->password(self::LENGTH, self::LENGTH));
     }
 }

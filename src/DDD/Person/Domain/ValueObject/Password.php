@@ -9,8 +9,7 @@ use InvalidArgumentException;
 
 class Password extends StringVO
 {
-    private const MIN_LENGTH = 5;
-    private const MAX_LENGTH = 20;
+    private const LENGTH = 32;
 
     private function __construct(string $value)
     {
@@ -25,10 +24,13 @@ class Password extends StringVO
 
     private function isValid(string $value): void
     {
-        $length = strlen($value);
-
-        if ($length < self::MIN_LENGTH || $length > self::MAX_LENGTH) {
+        if (strlen($value) !==  self::LENGTH) {
             throw new InvalidArgumentException();
         }
+    }
+
+    public function equals(Password $otherPassword): bool
+    {
+        return $this->primitiveValue() === $otherPassword->primitiveValue();
     }
 }

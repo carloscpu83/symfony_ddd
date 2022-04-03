@@ -1,3 +1,4 @@
 composer require fzaninotto/faker --dev
 composer require ramsey/uuid
 composer require --dev mockery/mockery
+composer global require squizlabs/php_codesniffer

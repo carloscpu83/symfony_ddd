@@ -42,7 +42,7 @@ class NameTest extends TestCase
         $this->assertTrue($nameA->equals($nameB));
     }
 
-    public function testisNotEquals(): void
+    public function testIsNotEquals(): void
     {
         $faker = Factory::create('es_ES');
         $nameA = Name::fromString($faker->name());

@@ -6,30 +6,35 @@ namespace App\DDD\Person\Domain\Entity;
 
 use App\DDD\Person\Domain\ValueObject\Age;
 use App\DDD\Person\Domain\ValueObject\Name;
+use App\DDD\Person\Domain\ValueObject\Password;
 
 class Person
 {
     private Name $name;
     private Age $age;
+    private Password $password;
 
     /**
      * @param Name $name
      * @param Age $age
+     * @param Password $password
      */
-    private function __construct(Name $name, Age $age)
+    private function __construct(Name $name, Age $age, Password $password)
     {
         $this->name = $name;
         $this->age = $age;
+        $this->password = $password;
     }
 
     /**
      * @param Name $name
      * @param Age $age
+     * @param Password $password
      * @return self
      */
-    public static function instantiate(Name $name, Age $age): self
+    public static function instantiate(Name $name, Age $age, Password $password): self
     {
-        return new static($name, $age);
+        return new static($name, $age, $password);
     }
 
     /**
@@ -46,6 +51,14 @@ class Person
     public function age(): Age
     {
         return $this->age;
+    }
+
+    /**
+     * @return Password
+     */
+    public function password(): Password
+    {
+        return $this->password;
     }
 
     /**
