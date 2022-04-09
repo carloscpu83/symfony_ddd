@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DDD\Person\Domain\Entity;
 
+use App\DDD\Person\Domain\Service\CreateMD5Password;
 use App\DDD\Person\Domain\ValueObject\Age;
 use App\DDD\Person\Domain\ValueObject\Name;
 use App\DDD\Person\Domain\ValueObject\Password;
@@ -13,28 +14,40 @@ class Person
     private Name $name;
     private Age $age;
     private Password $password;
+    private CreateMD5Password $createMD5Password;
 
     /**
      * @param Name $name
      * @param Age $age
      * @param Password $password
+     * @param CreateMD5Password $createMD5Password
      */
-    private function __construct(Name $name, Age $age, Password $password)
-    {
+    private function __construct(
+        Name $name,
+        Age $age,
+        Password $password,
+        CreateMD5Password $createMD5Password
+    ) {
         $this->name = $name;
         $this->age = $age;
-        $this->password = $password;
+        $this->password = $createMD5Password->execute($password->value());
+        $this->createMD5Password = $createMD5Password;
     }
 
     /**
      * @param Name $name
      * @param Age $age
      * @param Password $password
+     * @param CreateMD5Password $createMD5Password
      * @return self
      */
-    public static function instantiate(Name $name, Age $age, Password $password): self
-    {
-        return new static($name, $age, $password);
+    public static function instantiate(
+        Name $name,
+        Age $age,
+        Password $password,
+        CreateMD5Password $createMD5Password
+    ): self {
+        return new static($name, $age, $password, $createMD5Password);
     }
 
     /**

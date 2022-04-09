@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+
+  App\DDD\Person\Domain\Service\:
+    public: true
+    resource: "../src/DDD/Person/Domain/Service/*"
