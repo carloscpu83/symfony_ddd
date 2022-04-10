@@ -30,8 +30,7 @@ class Person
     ) {
         $this->name = $name;
         $this->age = $age;
-        $this->password = $createMD5Password->execute($password->value());
-        $this->createMD5Password = $createMD5Password;
+        $this->password = $createMD5Password->execute($password->primitiveValue());
     }
 
     /**
